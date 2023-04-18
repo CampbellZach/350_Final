@@ -24,7 +24,7 @@ include("controller.php");
         echo "<script>location.href='index.php';</script>";
 
     }
-    if($_GET['action'] == 'secret'){
+    if($_GET['action'] == 'create_item'){
         include('secret.html');
     }else{
         if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){

@@ -6,8 +6,8 @@
         echo "<a href='index.php?action=login'>LOGIN</a>";
         
     }else{
-        echo "<a href='index.php'>HOME</a>";
-        echo '<a href="index.php?action=secret">SECRET</a>';
+        echo "<a href='index.php'>Read</a>";
+        echo '<a href="index.php?action=create_item">Create</a>';
         echo '<a href="index.php?action=logout">LOGOUT</a>';
     }
 ?>
