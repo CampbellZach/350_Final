@@ -13,11 +13,10 @@ include("controller.php");
 
     <?php
     if($_GET['action'] == 'create'){
-        add_user();
+        include("create_user.html");
     }
     if($_GET['action'] == 'login'){
-        echo "<script>location.href='login.php';</script>";
-
+        include('login.html');
     }
     if($_GET['action'] == 'logout'){
         $_SESSION['isVerified'] = -1;
@@ -25,7 +24,7 @@ include("controller.php");
 
     }
     if($_GET['action'] == 'create_item'){
-        include('secret.html');
+        include('create_item.html');
     }else{
         if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
             
