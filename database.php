@@ -10,9 +10,15 @@
     echo "Connection failed: " . $e->getMessage();
     exit();
     }
+
     function add_user($username,$password){
-        //adds a new user to the database
+        global $con;
+        $stmt = $con->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':password', $password);
+        return $stmt->execute();
     }
+
     function add_item(){
         //takes items to be added and the uid of person signed in 
     }
