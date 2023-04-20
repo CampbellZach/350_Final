@@ -19,11 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['username'], $_POST['password']) ) {
         $user = getUserByUsername($_POST['username']);
         if($user && password_verify($_POST['password'], $user['password'])){
-            session_start();
+            session_regenerate_id();
             $_SESSION['loggedin'] = 1;
             $_SESSION['name'] = $_POST['username'];
-            $_SESSION['id'] = $id;
-            header('Location: index.php');
+            $_SESSION['id'] = $user['id'];
+            echo $user['id'];
+            //header('Location: index.php');
         } else {
             echo "<div class='error'>Incorrect username and/or password!</div>";
         }

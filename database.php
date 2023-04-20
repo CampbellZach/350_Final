@@ -47,7 +47,7 @@
         //takes items to be added and the uid of person signed in 
     }
     function read(){
-        //reads the users items from data base, gets passed uid
+        
     }
     function delete(){
         //takes in the uid, and the id of what the user wants deleted
