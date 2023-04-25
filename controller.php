@@ -7,17 +7,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['hidden_new'])) {
         $new_username = $_POST['username_new'];
         $new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
-       
-        /*if(checkIfUsernameExists($new_username)){
-            echo "4";
-            echo "Username already exists.";
-        }else{*/
-        createNewUser($new_username, $new_password);
-        echo "New user created.";
-        header('Location: index.php?action=login');
-                    
-                
-        //}
+        $res = checkIfUsernameExists($new_username);
+        if($res == 1){
+            echo "<br>Username already exists.";
+
+        }else{
+            createNewUser($new_username, $new_password);
+            echo "New user created.";
+            header('Location: index.php?action=login');
+        }
     }
     if(isset($_POST['hidden_login'])){
         if (isset($_POST['username'], $_POST['password']) ) {
