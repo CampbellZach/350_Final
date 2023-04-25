@@ -1,7 +1,8 @@
-<form method="POST">
+<form action='controller.php' method="POST">
     <label for="username_new">Username:</label>
     <input type="text" name="username_new" required><br>
+    <input type="hidden" name="hidden_new" value ='1'>
     <label for="password">Password:</label>
-    <input type="password" name="password" required><br>
+    <input type="password" name="new_password" required><br>
     <input type="submit" name="submit" value="ADD USER">
 </form>

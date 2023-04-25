@@ -12,11 +12,12 @@
     }
 
     function createNewUser($username,$password){
-        global $con;
-        $stmt = $con->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
+        global $conn;
+        $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (:username, :password)");
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $password);
         return $stmt->execute();
+
     }
 
     function getAccounts() {
@@ -28,8 +29,8 @@
     }
     
     function getUserByUsername($username) {
-        global $con;
-        $stmt = $con->prepare("SELECT * FROM users WHERE username = ?");
+        global $conn;
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
         $stmt->bindParam(1, $username);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -37,10 +38,12 @@
     }
     
     function checkIfUsernameExists($username) {
-        global $con;
-        $stmt = $con->prepare("SELECT COUNT(*) FROM users WHERE username = ?");
-        $stmt->execute([$username]);
-        return $stmt->fetchColumn() > 0;
+        global $conn;
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM users WHERE username = :username");
+        $stmt->bindParam(":username", $username);
+        $stmt->execute();
+        $result = $stmt->fetchColumn() > 0;
+        return $result;
     }
 
     function add_item(){
