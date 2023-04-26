@@ -35,6 +35,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
+    if (!isset($_GET['action'])) {
+        $accounts = getAccounts();
+        include 'views/read.php';
+    }
+
     if($_GET['action'] == 'create'){
         include("views/create_user.html");
     }
@@ -53,7 +58,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
         include('views/create_item.html');
     }
-
-
 }
 ?>   
