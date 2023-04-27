@@ -1,0 +1,14 @@
+<form action='controller.php' method="POST">
+    <input type="hidden" value='1' name="hidden_create">
+    <label for="Title">Title</label>
+    <input type="text" name="Title" required><br>
+    <label for="Pay">Pay</label>
+    <input type="number" name="Pay" step=".01" required><br>
+    <label for="Location">Location</label>
+    <input type="text" name="Location" required><br>
+    <label for="Response">Response</label>
+    <input type="text" name="Response" required><br>
+    <label for="Notes">Notes</label>
+    <textarea name="Notes"  cols="30" rows="10"required></textarea><br>
+    <input type="submit" value="Add Job">
+</form>
