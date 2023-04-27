@@ -45,8 +45,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+<<<<<<< HEAD
     $action = $_GET['action'];
     if($action == 'create'){
+=======
+
+    if (!isset($_GET['action'])) {
+        $accounts = getAccounts();
+        include 'views/read.php';
+    }
+
+    if($_GET['action'] == 'create'){
+>>>>>>> 5642899b437ad4d641b8285cdca7b2fd91bdb972
         include("views/create_user.html");
     }
     if($action == 'login'){
@@ -64,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
         include('views/create_item.html');
     }
+<<<<<<< HEAD
     else{
         if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
             echo "Login or create an account to see more!";
@@ -74,5 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
 
+=======
+>>>>>>> 5642899b437ad4d641b8285cdca7b2fd91bdb972
 }
 ?>   
