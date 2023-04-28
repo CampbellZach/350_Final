@@ -81,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
     if($action == 'delete'){
         $id = $_GET['id'];
+        checkId($conn,$id);
         delete($conn,$id);
     }
     if($action == NULL){
