@@ -23,8 +23,9 @@
                     </form>
                 </td>
                 <td>
-                    <form action='controller.php' method="POST">
-                        <input type="hidden" name='delete' value="<?php echo $row['id']; ?>">
+                    <form action='index.php' method="get">
+                        <input type="hidden" name='action' value='delete'>
+                        <input type="hidden" name='id' value="<?php echo $row['id']; ?>">
                         <input type="submit" value='delete'>
                     </form>
                 </td>

@@ -74,19 +74,43 @@ function read($conn)
     $data = $stmt->fetchAll();
     return $data;
 }
-function delete($conn)
+function delete($conn,$id)
 {
     //takes in the uid, and the id of what the user wants deleted
+    $sql = "DELETE FROM `job_search` WHERE `id` = :id AND `uid` = :uid";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":id", $id);
+    $stmt->bindParam(":uid", $_SESSION['id']);
+    if ($stmt->execute()) {
+        header('Location: index.php');
+    } else {
+        echo "Error deleting from database, please try again.";
+    }
 }
-function update($conn,$Title,$Pay,$Location,$Response,$Notes)
+function update($conn,$Title,$Pay,$Location,$Response,$Notes,$id)
 {
     //takes in the uid and the id of item wanting to be updated
     $sql = "UPDATE `job_search` SET 
-    `Title`=':Title',
-    `Pay`=':Pay',
-    `Location`=':Location',
-    `Response`=':Response',
-    `Notes`=':Notes' WHERE id = :id";
+    `uid`=:uid,
+    `Title`=:Title,
+    `Pay`=:Pay,
+    `Location`=:Location,
+    `Response`=:Response,
+    `Notes`=:Notes WHERE `id`=:id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":uid", $_SESSION['id']);
+    $stmt->bindParam(":Title", $Title);
+    $stmt->bindParam(":Pay", $Pay);
+    $stmt->bindParam(":Location", $Location);
+    $stmt->bindParam(":Response", $Response);
+    $stmt->bindParam(":Notes", $Notes);
+    $stmt->bindParam(":id", $id);
+
+    if ($stmt->execute()) {
+        header('Location: index.php');
+    } else {
+        echo "Error Updating to database, please try again.";
+    }
 
 }
 
@@ -97,4 +121,16 @@ function readId($conn,$id)
     $stmt->execute();
     $data = $stmt->fetchAll();
     return $data;
+}
+function checkId($conn,$id)
+{
+    $sql = "SELECT uid FROM job_search WHERE id = :id";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($row['uid'] != $_SESSION['id']) {
+        header('Location: index.php');
+        exit();
+    }
 }

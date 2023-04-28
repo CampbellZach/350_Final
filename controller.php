@@ -42,6 +42,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $Notes = $_POST['Notes'];
         add_item($conn,$Title,$Pay,$Location,$Response,$Notes);
     }
+    if($_POST['hidden_update'] == 'done'){
+        $Title = $_POST['Title'];
+        $Pay = $_POST['Pay'];
+        $Location = $_POST['Location'];
+        $Response = $_POST['Response'];
+        $Notes = $_POST['Notes'];
+        $id = $_POST['id'];
+        update($conn,$Title,$Pay,$Location,$Response,$Notes,$id);
+    }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -68,16 +77,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $id = $_GET['id'];
         $data_id = readId($conn,$id);
         include('views/update.php');
-        if($_GET['hidden_update'] == 'done'){
-            $Title = $_GET['Title'];
-            $Pay = $_GET['Pay'];
-            $Location = $_GET['Location'];
-            $Response = $_GET['Response'];
-            $Notes = $_GET['Notes'];
-            update($conn,$Title,$Pay,$Location,$Response,$Notes);
-        }
+       
     }
-    else{
+    if($action == 'delete'){
+        $id = $_GET['id'];
+        delete($conn,$id);
+    }
+    if($action == NULL){
         if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
             echo "Login or create an account to see more!";
         }else{
