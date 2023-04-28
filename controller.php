@@ -64,6 +64,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         }
         include('views/create_item.html');
     }
+    if($action == 'update'){
+        $id = $_GET['id'];
+        $data_id = readId($conn,$id);
+        include('views/update.php');
+        if($_GET['hidden_update'] == 'done'){
+            $Title = $_GET['Title'];
+            $Pay = $_GET['Pay'];
+            $Location = $_GET['Location'];
+            $Response = $_GET['Response'];
+            $Notes = $_GET['Notes'];
+            update($conn,$Title,$Pay,$Location,$Response,$Notes);
+        }
+    }
     else{
         if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
             echo "Login or create an account to see more!";

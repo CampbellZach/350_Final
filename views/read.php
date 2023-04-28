@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <h1>READ</h1>
 <div>
     <table>
@@ -17,8 +16,9 @@
                 <td><?php echo $row['Response']; ?></td>
                 <td><?php echo $row['Notes']; ?></td>
                 <td>
-                    <form action='controller.php' method="POST">
-                        <input type="hidden" name='update' value="<?php echo $row['id']; ?>">
+                    <form action='index.php' method="get">
+                        <input type="hidden" name='action' value='update'>
+                        <input type="hidden" name='id' value="<?php echo $row['id']; ?>">
                         <input type="submit" value='update'>
                     </form>
                 </td>
@@ -33,20 +33,3 @@
 
     </table>
 </div>
-=======
-<table>
-    <tr>
-        <th>Username</th>
-        <th>Password Hash</th>
-    </tr>
-    <?php
-        foreach ($accounts as $row) {
-            echo "<tr>";
-            echo "<td>" . $row['id'] . "</td>";
-            echo "<td>" . $row['username'] . "</td>";
-            echo "<td>" . $row['password'] . "</td>";
-            echo "</tr>";
-        }
-    ?>
-</table>
->>>>>>> 5642899b437ad4d641b8285cdca7b2fd91bdb972

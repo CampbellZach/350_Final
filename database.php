@@ -78,7 +78,23 @@ function delete($conn)
 {
     //takes in the uid, and the id of what the user wants deleted
 }
-function update($conn)
+function update($conn,$Title,$Pay,$Location,$Response,$Notes)
 {
     //takes in the uid and the id of item wanting to be updated
+    $sql = "UPDATE `job_search` SET 
+    `Title`=':Title',
+    `Pay`=':Pay',
+    `Location`=':Location',
+    `Response`=':Response',
+    `Notes`=':Notes' WHERE id = :id";
+
+}
+
+function readId($conn,$id)
+{
+    $t1q = "SELECT * FROM `job_search` WHERE id =".$id;
+    $stmt = $conn->prepare($t1q);
+    $stmt->execute();
+    $data = $stmt->fetchAll();
+    return $data;
 }
