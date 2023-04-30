@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['id'] = $user['id'];
                 header('Location: index.php');
             } else {
-                echo "<div class='error'>Incorrect username and/or password!</div>";
+                header('Location: index.php?action=login');
             }
         }
     }
@@ -42,19 +42,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $Notes = $_POST['Notes'];
         add_item($conn,$Title,$Pay,$Location,$Response,$Notes);
     }
-    if($_POST['hidden_update'] == 'done'){
-        $Title = $_POST['Title'];
-        $Pay = $_POST['Pay'];
-        $Location = $_POST['Location'];
-        $Response = $_POST['Response'];
-        $Notes = $_POST['Notes'];
-        $id = $_POST['id'];
-        update($conn,$Title,$Pay,$Location,$Response,$Notes,$id);
+    if(isset($_POST['hidden_update'])){
+        if($_POST['hidden_update'] == 'done'){
+            $Title = $_POST['Title'];
+            $Pay = $_POST['Pay'];
+            $Location = $_POST['Location'];
+            $Response = $_POST['Response'];
+            $Notes = $_POST['Notes'];
+            $id = $_POST['id'];
+            update($conn,$Title,$Pay,$Location,$Response,$Notes,$id);
+        }
     }
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $action = $_GET['action'];
+    if(isset($_GET['action'])){
+        $action = $_GET['action'];
+    }
     if($action == 'create'){
         include("views/create_user.html");
     }
@@ -86,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
     if($action == NULL){
         if(!isset($_SESSION['isVerified']) || $_SESSION['isVerified'] != 1){
-            echo "Login or create an account to see more!";
+            include('views/home.html');
         }else{
             $data = read($conn);
             include('views/read.php');

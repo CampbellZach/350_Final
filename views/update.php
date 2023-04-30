@@ -1,6 +1,8 @@
 <?php checkId($conn,$id);?>
 <?php foreach ($data_id as $row) : ?>
-
+<head>
+    <link rel="stylesheet" href="styles/update.css">
+</head>
 <h2>Update</h2>
 <form method="post">
     <label for="Title">Title</label>

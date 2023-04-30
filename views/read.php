@@ -1,5 +1,8 @@
-<h1>READ</h1>
-<div>
+<head>
+    <link rel="stylesheet" href="styles/read.css">
+</head>
+<h1>My Jobs</h1>
+<div class="read">
     <table>
         <tr>
             <td>Title</td>
