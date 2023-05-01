@@ -77,10 +77,9 @@ function read($conn)
 function delete($conn,$id)
 {
     //takes in the uid, and the id of what the user wants deleted
-    $sql = "DELETE FROM `job_search` WHERE `id` = :id AND `uid` = :uid";
+    $sql = "DELETE FROM `job_search` WHERE `id` = :id ";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":id", $id);
-    $stmt->bindParam(":uid", $_SESSION['id']);
     if ($stmt->execute()) {
         header('Location: index.php');
     } else {
